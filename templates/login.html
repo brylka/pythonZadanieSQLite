@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mt-5">
+          <div class="card-header bg-primary text-white">
+            Logowanie
+          </div>
+          <div class="card-body">
+            <form method="post">
+              <div class="mb-3">
+                <label for="username" class="form-label">Nazwa użytkownika:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Hasło:</label>
+                <input type="password" class="form-control"  id="password" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Zaloguj się</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div id="flash-messages" class="position-fixed top-50 start-50 translate-middle" style="z-index: 1050;">
+      {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+
+    <script>
+      // Czas po jakim alert ma zniknąć (w milisekundach)
+      const alertTimeout = 5000; // 5 sekund
+
+      document.addEventListener('DOMContentLoaded', (event) => {
+        setTimeout(() => {
+          const flashMessages = document.getElementById('flash-messages');
+          flashMessages.style.display = 'none';
+        }, alertTimeout);
+      });
+    </script>
+  {% endif %}
+{% endwith %}
+
+{% endblock %}
